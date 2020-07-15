@@ -1,0 +1,128 @@
+import java.util.Scanner;
+import java.io.*;
+import java.util.Arrays;
+/**
+ * Employee class parses a file containing employee information, assigning each portion to a seporate variable.
+ * 
+ * @author Culver, Rachel
+ * @version 11/10/2017
+ */
+public class Employee implements Comparable 
+{
+    private String buf;
+    private Scanner fileScan;
+    private String line;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private int tenure;
+    private String rate;
+    private double salary;
+    
+     /**
+      * Splits a string, assigning each word (first and last name, gender, years with company, W/H, wage) to the individual variables.
+      *
+      * @param a - string from employee file
+      */
+     public void parseString(String a) {
+        line = a;
+        String spaces = "[ ]+";
+        String[] words = line.split(spaces);
+        firstName = words[0];
+        lastName = words[1];
+        gender = words[2];
+        tenure = Integer.parseInt(words[3]);
+        rate = words[4];
+        salary = Double.parseDouble(words[5]);
+    }
+    
+    /**
+     * Splits a string, assigning only the first two words to individual words (first and last name).
+     *
+     * @param a - string from employee file
+     */
+    public void parseNames(String a) {
+        line = a;
+        String spaces = "[ ]+";
+        String[] words = line.split(spaces);
+        firstName = words[0];
+        lastName = words[1];
+    }
+    
+    /**
+     * Returns the first name of an employee
+     *
+     * @return first name of employee
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    /**
+     * Returns the last name of an employee
+     *
+     * @return last name of employee
+     */
+    public String getLastName() {
+        return lastName;
+    }
+    
+    /**
+     * Returns the gender of the employee 
+     *
+     * @return gender of the employee
+     */
+    public String getGender() {
+        return gender;
+    }
+    
+    /**
+     * Returns how many years the employee has been with the complany
+     * 
+     * @return  employees years with the company
+     */
+    public int getTenure() {
+        return tenure;
+    }
+    
+    /**
+     * Returns whether the employee is payed weekly or hourly
+     * 
+     * @return employee rate (payed weekly or hourly)
+     */
+    public String getRate() {
+        return rate;
+    }
+    
+    /** 
+     * Returns the salary of the employee
+     *
+     * @return the salary of the employee
+     */
+    public double getSalary() {
+        return salary;
+    }
+    
+    /**
+     * Sets the salary of the employee
+     *
+     * @param w - double salary of employee
+     */
+    public void setSalary(double s) {
+        salary = s;
+    }
+    
+    /**
+     * Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+     *
+     * @param o employee object to be comared
+     * @return negative integer, zero, or positive integer
+     */
+    public int compareTo(Object o) {
+        Employee e = (Employee) o;
+        if(lastName.compareTo(e.getLastName()) == 0) {
+            return firstName.compareTo(e.getFirstName());
+        }
+        return lastName.compareTo(e.getLastName());
+   }
+}
